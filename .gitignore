@@ -1,0 +1,10 @@
+.DS_Store
+/.build
+/Packages
+xcuserdata/
+DerivedData/
+.netrc
+.swiftpm/
+*Generated/
+Package.resolved
+.swiftlint/

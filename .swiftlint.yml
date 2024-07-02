@@ -1,0 +1,4 @@
+parent_config: https://raw.githubusercontent.com/adevinta/spark-ios-common/main/.swiftlint.yml
+
+excluded:
+  - "**/*.generated.swift"

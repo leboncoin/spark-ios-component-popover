@@ -1,0 +1,9 @@
+name: build-demo-app
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  build-demo-app:
+    uses: adevinta/spark-ios-common/.github/workflows/buildDemoApp.yml@main
