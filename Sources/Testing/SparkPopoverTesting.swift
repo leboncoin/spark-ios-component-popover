@@ -1,9 +1,9 @@
 //
-//  ___COMPONENT_NAME___Testing.swift
-//  Spark___COMPONENT_NAME___
+//  SparkPopoverTesting.swift
+//  SparkPopover
 //
-//  Created by ___USERNAME___ on ___CURRENT_DATE___.
-//  Copyright © ___CURRENT_YEAR___ Adevinta. All rights reserved.
+//  Created by Michael Zimmermann on 02/07/2024.
+//  Copyright © 2024 Adevinta. All rights reserved.
 //
 
 import Foundation
@@ -14,4 +14,3 @@ import Foundation
 // This file is needed because there is
 // no code (without the code generated
 // by sourcery) on this target.
-
