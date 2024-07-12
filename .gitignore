@@ -8,3 +8,6 @@ DerivedData/
 *Generated/
 Package.resolved
 .swiftlint/
+
+# SwiftLint Remote Config Cache
+.swiftlint/RemoteConfigCache

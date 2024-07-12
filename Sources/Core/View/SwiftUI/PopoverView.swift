@@ -10,16 +10,34 @@ import SwiftUI
 import SparkTheming
 @_spi(SI_SPI) import SparkCommon
 
-/// The SwiftUI version for the popover
-public struct PopoverView: View {
+@available(iOS 16.4, *)
+struct PopoverView<Content>: View where Content: View {
 
-    // MARK: - View
+    private let viewModel: PopoverViewModel
+    private let content: (PopoverColors) -> Content
 
-    public var body: some View {
-        Text("Hello Popover")
+    init(
+        theme: Theme,
+        intent: PopoverIntent,
+        showArrow: Bool,
+        content: @escaping (PopoverColors) -> Content
+    ) {
+        self.viewModel = .init(theme: theme, intent: intent, showArrow: showArrow)
+        self.content = content
     }
 
-    // MARK: - Modifier
-
-    // TODO:
+    var body: some View {
+        ZStack {
+            self.viewModel.colors.background.color
+                .scaleEffect(2)  // Needed to fill the arrow
+            self.content(self.viewModel.colors)
+                .padding(
+                    EdgeInsets(
+                        vertical: self.viewModel.spaces.vertical,
+                        horizontal: self.viewModel.spaces.horizontal
+                    )
+                )
+        }
+        .presentationCompactAdaptation(.popover)
+    }
 }
