@@ -27,7 +27,7 @@ public extension View {
     ///   - content: A closure returning the content of the popover.
     ///     It has a `PopoverColors` as a parameter.
     func popover<Content>(
-        theme: Theme,
+        theme: any Theme,
         intent: PopoverIntent,
         isPresented: Binding<Bool>,
         attachmentAnchor: PopoverAttachmentAnchor = .rect(.bounds),

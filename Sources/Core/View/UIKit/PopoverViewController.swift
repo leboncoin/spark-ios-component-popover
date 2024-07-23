@@ -39,7 +39,7 @@ public final class PopoverViewController: UIViewController, UIPopoverPresentatio
     ///   - theme: The theme of a Popover
     ///   - intent: The intent of the Popover
     ///   - showArrow: Boolean used to show or hide the tip arrow of the Popover
-    public convenience init(contentViewController: UIViewController, theme: Theme, intent: PopoverIntent, showArrow: Bool = true) {
+    public convenience init(contentViewController: UIViewController, theme: any Theme, intent: PopoverIntent, showArrow: Bool = true) {
         self.init(viewModel: .init(theme: theme, intent: intent, showArrow: showArrow), contentViewController: contentViewController)
     }
 
