@@ -36,6 +36,6 @@ public extension UIViewController {
             }
             popoverPresentationController.permittedArrowDirections = permittedArrowDirections
         }
-        self.present(popoverViewControllerToPresent, animated: flag)
+        self.present(popoverViewControllerToPresent, animated: flag, completion: completion)
     }
 }
