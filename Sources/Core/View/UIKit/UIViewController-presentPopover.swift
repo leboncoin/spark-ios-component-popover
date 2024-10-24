@@ -16,6 +16,7 @@ public extension UIViewController {
     ///   - sourceView: UIPopoverPresentationController.sourceView
     ///   - sourceRect: UIPopoverPresentationController.sourceRect
     ///   - permittedArrowDirections: UIPopoverPresentationController.permittedArrowDirections
+    ///   - passthroughViews: UIPopoverPresentationController.passthroughViews
     ///   - flag: Pass true to animate the presentation; otherwise, pass false.
     ///   - completion: The block to execute after the presentation finishes. This block has no return value and takes no parameters. You may specify nil for this parameter.
     func presentPopover(
@@ -23,11 +24,12 @@ public extension UIViewController {
         sourceView: UIView,
         sourceRect: CGRect? = nil,
         permittedArrowDirections: UIPopoverArrowDirection = .any,
+        passthroughViews: [UIView]? = nil,
         animated flag: Bool = true,
         completion: (() -> Void)? = nil
     ) {
         if let popoverPresentationController = popoverViewControllerToPresent.popoverPresentationController {
-            popoverPresentationController.passthroughViews = self.view.subviews
+            popoverPresentationController.passthroughViews = passthroughViews
             popoverPresentationController.sourceView = sourceView
             if let sourceRect {
                 popoverPresentationController.sourceRect = sourceRect
