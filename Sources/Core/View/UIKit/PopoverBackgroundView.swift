@@ -112,7 +112,7 @@ final class PopoverBackgroundView: UIPopoverBackgroundView {
         if let path {
             let shape = CAShapeLayer()
             shape.path = path
-            shape.fillColor = PopoverBackgroundConfiguration.backgroundColor.cgColor
+            shape.fillColor = PopoverBackgroundConfiguration.backgroundColor.resolvedColor(with: self.traitCollection).cgColor
             self.layer.insertSublayer(shape, at: 0)
             self.arrowShape = shape
         }
@@ -204,5 +204,11 @@ final class PopoverBackgroundView: UIPopoverBackgroundView {
         path.addLine(to: point3)
         path.addLine(to: point1)
         return path
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        guard  self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
+        self.arrowShape?.fillColor = PopoverBackgroundConfiguration.backgroundColor.resolvedColor(with: self.traitCollection).cgColor
     }
 }
