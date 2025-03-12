@@ -1,138 +1,67 @@
-
 # Popover
+
+**Spark** is the [Leboncoin](https://www.leboncoin.fr/)'s _Design System_.
+
+The repository here contains only the **iOS Popover** for _SwiftUI_ (iOS 16.4) and _UIKit_.
+
+You can also see all of our Spark iOS repositories on [Github](https://github.com/orgs/leboncoin/repositories?q=spark-ios+sort%3Aname-asc).
 
 ## Specifications
 
 The popover specifications on Zeroheight is [here](https://zeroheight.com/1186e1705/v/latest/p/88a08c-popover).
 
-![Figma anatomy](https://github.com/adevinta/spark-ios-component-popover/blob/main/.github/assets/popover.png)
+![Figma anatomy](https://github.com/leboncoin/spark-ios-component-popover/blob/main/.github/assets/popover.png)
 
-Popover is available for all versions in UIKit.  
-Popover is availabe starting iOS 16.4 in SwiftUI.
+## Technical Documentation
 
-## UIKit
+You are a developer ? A technical documentation in _DocC_ is available [here](https://leboncoin.github.io/spark-ios-component-popover/).
 
-### Usage
+### Swift Package Manager
 
-Spark's approach is heavily relying on the native UIKit `popoverPresentationController`.  
-The API is very similar.
+_Note: Instructions below are for using **SPM** without the Xcode UI. It's the easiest to go to your Project Settings -> Swift Packages and add SparkPopover from there._
+
+To integrate using Apple's Swift package manager, without Xcode integration, add the following as a dependency to your `Package.swift`:
 
 ```swift
-public extension UIViewController {
-
-    /// Presents a Spark Popover modally.
-    /// - Parameters:
-    ///   - popoverViewControllerToPresent: The Spark Popover to display over the current view controller’s content
-    ///   - sourceView: UIPopoverPresentationController.sourceView
-    ///   - sourceRect: UIPopoverPresentationController.sourceRect
-    ///   - permittedArrowDirections: UIPopoverPresentationController.permittedArrowDirections
-    ///   - flag: Pass true to animate the presentation; otherwise, pass false.
-    ///   - completion: The block to execute after the presentation finishes. This block has no return value and takes no parameters. You may specify nil for this parameter.
-    func presentPopover(
-        _ popoverViewControllerToPresent: PopoverViewController,
-        sourceView: UIView,
-        sourceRect: CGRect? = nil,
-        permittedArrowDirections: UIPopoverArrowDirection = .any,
-        animated flag: Bool = true,
-        completion: (() -> Void)? = nil
-    )
-
-}
+.package(url: "https://github.com/leboncoin/spark-ios-component-popover.git", .upToNextMajor(from: "1.0.0"))
 ```
 
-### PopoverViewController
+and then specify `SparkPopover` as a dependency of the Target in which you wish to use the SparkPopover.
 
-To define the Popover's content, consumers will need to provide a PopoverViewController with its content.
-
-```swift
-/// ViewController used as a container for the content of a Popover
-/// It handles the background configuration such as color, inner spacings and the drawing of the arrow if needed
-/// The content viewController is defined by the consumer, it should have a .clear background, no padding and have a well defined preferredContentSize for the popover to calculate its size properly
-public final class PopoverViewController: UIViewController, UIPopoverPresentationControllerDelegate {
-
-    /// PopoverViewController initializer
-    /// - Parameters:
-    ///   - contentViewController: The viewController that will be embedded in the popover: it should have a .clear background, no padding and have a well defined preferredContentSize for the popover to calculate its size properly
-    ///   - theme: The theme of a Popover
-    ///   - intent: The intent of the Popover
-    ///   - showArrow: Boolean used to show or hide the tip arrow of the Popover
-    public convenience init(
-        contentViewController: UIViewController,
-        theme: any Theme, 
-        intent: PopoverIntent, 
-        showArrow: Bool = true
-    )
-
-}
-```
-
-## SwiftUI
-
-The same way as for UIKit, Spark's SwiftUI Popover builds upon the native one
+Here's an example `Package.swift`:
 
 ```swift
-public extension View {
-    @available(iOS 16.4, *)
-    /// Presents a Spark popover when a given condition is true.
-    /// - Parameters:
-    ///   - theme: The Spark theme of the Spark popover.
-    ///   - intent: The Spark intent of the Spark popover.
-    ///   - isPresented: A binding to a Boolean value that determines whether
-    ///     to present the popover content that you return from the modifier's
-    ///     `content` closure.
-    ///   - attachmentAnchor: The positioning anchor that defines the
-    ///     attachment point of the popover. The default is
-    ///     ``Anchor/Source/bounds``.
-    ///   - arrowEdge: The edge of the `attachmentAnchor` that defines the
-    ///     location of the popover's arrow in macOS. The default is ``Edge/top``.
-    ///     iOS ignores this parameter.
-    ///   - content: A closure returning the content of the popover.
-    ///     It has a `PopoverColors` as a parameter.
-    func popover<Content>(
-        theme: any Theme,
-        intent: PopoverIntent,
-        isPresented: Binding<Bool>,
-        attachmentAnchor: PopoverAttachmentAnchor = .rect(.bounds),
-        arrowEdge: Edge = .top,
-        @ViewBuilder content: @escaping (PopoverColors) -> Content
-    ) -> some View where Content: View
-}
-```
+// swift-tools-version:5.9
+import PackageDescription
 
-## Content configuration
-
-To help you configure your content's colors accordingly to the intent, use `PopoverIntent.getColors(theme:)`
-```swift
-/// Intent used to { get set } background & foreground colors on the popover
-public enum PopoverIntent: CaseIterable {
-
-    case surface
-    case main
-    case support
-    case accent
-    case basic
-    case success
-    case alert
-    case error
-    case info
-    case neutral
-
-    /// Get the colors to apply on popovers from an intent
-    /// - Parameters:
-    ///   - theme: Spark theme
-    /// - Returns: PopoverColors
-    public func getColors(theme: Theme) -> PopoverColors
-
-}
-
-public struct PopoverColors {
-
-    /// Popover background color
-    public let background: any ColorToken
-    /// Popover foreground color
-    public let foreground: any ColorToken
-
-}
+let package = Package(
+    name: "MyPackage",
+    platforms: [
+        .iOS(.v16)
+    ],
+    products: [
+        .library(
+            name: "MyPackage",
+            targets: ["MyPackage"]),
+    ],
+    dependencies: [
+        .package(
+            url: "https://github.com/leboncoin/spark-ios-component-popover.git",
+            .upToNextMajor(from: "1.0.0")
+        )
+    ],
+    targets: [
+        .target(
+            name: "MyPackage",
+            dependencies: [
+                .product(
+                    name: "SparkPopover",
+                    package: "spark-ios-component-popover"
+                ),
+            ]
+        )
+    ]
+)
 ```
 
 ## License
@@ -140,7 +69,7 @@ public struct PopoverColors {
 ```
 MIT License
 
-Copyright (c) 2024 Adevinta
+Copyright (c) 2024 Leboncoin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

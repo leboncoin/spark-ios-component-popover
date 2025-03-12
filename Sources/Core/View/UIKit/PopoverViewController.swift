@@ -3,7 +3,7 @@
 //  SparkPopover
 //
 //  Created by louis.borlee on 25/06/2024.
-//  Copyright © 2024 Adevinta. All rights reserved.
+//  Copyright © 2024 Leboncoin. All rights reserved.
 //
 
 @_spi(SI_SPI) import SparkCommon
