@@ -6,4 +6,4 @@ on:
 
 jobs:
   build-demo-app:
-    uses: adevinta/spark-ios-common/.github/workflows/buildDemoApp.yml@main
+    uses: leboncoin/spark-ios-common/.github/workflows/buildDemoApp.yml@main

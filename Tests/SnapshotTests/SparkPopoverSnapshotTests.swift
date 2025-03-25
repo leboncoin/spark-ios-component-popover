@@ -3,7 +3,7 @@
 //  SparkPopover
 //
 //  Created by Michael Zimmermann on 03.07.24.
-//  Copyright © 2024 Adevinta. All rights reserved.
+//  Copyright © 2024 Leboncoin. All rights reserved.
 //
 
 import Foundation
