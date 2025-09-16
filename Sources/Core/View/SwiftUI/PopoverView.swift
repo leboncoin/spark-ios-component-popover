@@ -1,6 +1,6 @@
 //
 //  PopoverView.swift
-//  SparkPopover
+//  SparkComponentPopover
 //
 //  Created by Michael Zimmermann on 02/07/2024.
 //  Copyright © 2024 Leboncoin. All rights reserved.
@@ -17,7 +17,7 @@ struct PopoverView<Content>: View where Content: View {
     private let content: (PopoverColors) -> Content
 
     init(
-        theme: Theme,
+        theme: any Theme,
         intent: PopoverIntent,
         showArrow: Bool,
         content: @escaping (PopoverColors) -> Content

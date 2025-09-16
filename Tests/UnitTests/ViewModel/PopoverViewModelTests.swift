@@ -1,13 +1,13 @@
 //
 //  PopoverViewModelTests.swift
-//  SparkPopoverUnitTests
+//  SparkComponentPopoverUnitTests
 //
 //  Created by louis.borlee on 26/06/2024.
 //  Copyright © 2024 Leboncoin. All rights reserved.
 //
 
-@testable import SparkPopover
-@_spi(SI_SPI) @testable import SparkPopoverTesting
+@testable import SparkComponentPopover
+@_spi(SI_SPI) @testable import SparkComponentPopoverTesting
 @_spi(SI_SPI) import SparkThemingTesting
 import XCTest
 

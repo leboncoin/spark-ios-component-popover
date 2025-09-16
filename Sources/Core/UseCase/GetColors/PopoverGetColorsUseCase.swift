@@ -11,11 +11,11 @@ import SparkTheming
 
 // sourcery: AutoMockable
 protocol PopoverGetColorsUseCasable {
-    func execute(colors: Colors, intent: PopoverIntent) -> PopoverColors
+    func execute(colors: any Colors, intent: PopoverIntent) -> PopoverColors
 }
 
 final class PopoverGetColorsUseCase: PopoverGetColorsUseCasable {
-    func execute(colors: Colors, intent: PopoverIntent) -> PopoverColors {
+    func execute(colors: any Colors, intent: PopoverIntent) -> PopoverColors {
         switch intent {
         case .surface:
             return .init(

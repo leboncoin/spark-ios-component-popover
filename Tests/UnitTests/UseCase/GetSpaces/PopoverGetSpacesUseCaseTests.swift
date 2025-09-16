@@ -1,13 +1,13 @@
 //
 //  PopoverGetSpacesUseCaseTests.swift
-//  SparkPopoverUnitTests
+//  SparkComponentPopoverUnitTests
 //
 //  Created by louis.borlee on 25/06/2024.
 //  Copyright © 2024 Leboncoin. All rights reserved.
 //
 
 import XCTest
-@testable import SparkPopover
+@testable import SparkComponentPopover
 @_spi(SI_SPI) import SparkThemingTesting
 
 final class PopoverGetSpacesUseCaseTests: XCTestCase {

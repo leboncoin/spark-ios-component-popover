@@ -11,4 +11,4 @@ configurations:
     args:
       autoMockableImports: [Combine, SparkTheming]
       autoMockableSPIImports: [SparkCommon, SparkCommonTesting, SparkThemingTesting]
-      autoMockableTestableImports: [SparkPopover]
+      autoMockableTestableImports: [SparkComponentPopover]
