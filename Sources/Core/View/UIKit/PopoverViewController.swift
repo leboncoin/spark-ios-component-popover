@@ -1,6 +1,6 @@
 //
 //  PopoverViewController.swift
-//  SparkPopover
+//  SparkComponentPopover
 //
 //  Created by louis.borlee on 25/06/2024.
 //  Copyright © 2024 Leboncoin. All rights reserved.

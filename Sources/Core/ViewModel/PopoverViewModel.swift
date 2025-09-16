@@ -1,6 +1,6 @@
 //
 //  PopoverViewModel.swift
-//  SparkPopover
+//  SparkComponentPopover
 //
 //  Created by louis.borlee on 26/06/2024.
 //  Copyright © 2024 Leboncoin. All rights reserved.
@@ -16,11 +16,11 @@ struct PopoverViewModel {
     let arrowSize: CGFloat
 
     init(
-        theme: Theme,
+        theme: any Theme,
         intent: PopoverIntent,
         showArrow: Bool,
-        getColorsUseCase: PopoverGetColorsUseCasable = PopoverGetColorsUseCase(),
-        getSpacesUseCase: PopoverGetSpacesUseCasable = PopoverGetSpacesUseCase()
+        getColorsUseCase: any PopoverGetColorsUseCasable = PopoverGetColorsUseCase(),
+        getSpacesUseCase: any PopoverGetSpacesUseCasable = PopoverGetSpacesUseCase()
     ) {
         self.colors = getColorsUseCase.execute(colors: theme.colors, intent: intent)
         self.spaces = getSpacesUseCase.execute(layoutSpacing: theme.layout.spacing)

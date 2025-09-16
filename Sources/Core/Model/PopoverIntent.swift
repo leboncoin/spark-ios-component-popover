@@ -26,7 +26,7 @@ public enum PopoverIntent: CaseIterable {
         return PopoverGetColorsUseCase()
     }
 
-    internal func getColors(theme: Theme, getColorsUseCase: PopoverGetColorsUseCasable) -> PopoverColors {
+    internal func getColors(theme: any Theme, getColorsUseCase: PopoverGetColorsUseCasable) -> PopoverColors {
         return getColorsUseCase.execute(colors: theme.colors, intent: self)
     }
 
@@ -34,7 +34,7 @@ public enum PopoverIntent: CaseIterable {
     /// - Parameters:
     ///   - theme: Spark theme
     /// - Returns: PopoverColors
-    public func getColors(theme: Theme) -> PopoverColors {
+    public func getColors(theme: any Theme) -> PopoverColors {
         return self.getColors(theme: theme, getColorsUseCase: self.getColorsUseCase)
     }
 }

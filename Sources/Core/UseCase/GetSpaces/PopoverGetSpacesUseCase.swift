@@ -11,7 +11,7 @@ import SparkTheming
 
 // sourcery: AutoMockable
 protocol PopoverGetSpacesUseCasable {
-    func execute(layoutSpacing: LayoutSpacing) -> PopoverSpaces
+    func execute(layoutSpacing: any LayoutSpacing) -> PopoverSpaces
 }
 
 final class PopoverGetSpacesUseCase: PopoverGetSpacesUseCasable {

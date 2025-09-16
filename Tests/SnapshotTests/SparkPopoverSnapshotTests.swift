@@ -1,6 +1,6 @@
 //
-//  SparkPopoverSnapshotTests.swift
-//  SparkPopover
+//  SparkComponentPopoverSnapshotTests.swift
+//  SparkComponentPopover
 //
 //  Created by Michael Zimmermann on 03.07.24.
 //  Copyright © 2024 Leboncoin. All rights reserved.

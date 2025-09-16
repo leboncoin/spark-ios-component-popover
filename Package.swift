@@ -5,18 +5,18 @@ import PackageDescription
 
 // swiftlint:disable all
 let package = Package(
-    name: "SparkPopover",
+    name: "SparkComponentPopover",
     platforms: [
         .iOS(.v16)
     ],
     products: [
         .library(
-            name: "SparkPopover",
-            targets: ["SparkPopover"]
+            name: "SparkComponentPopover",
+            targets: ["SparkComponentPopover"]
         ),
         .library(
-            name: "SparkPopoverTesting",
-            targets: ["SparkPopoverTesting"]
+            name: "SparkComponentPopoverTesting",
+            targets: ["SparkComponentPopoverTesting"]
         )
     ],
     dependencies: [
@@ -33,7 +33,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "SparkPopover",
+            name: "SparkComponentPopover",
             dependencies: [
                 .product(
                     name: "SparkCommon",
@@ -47,9 +47,9 @@ let package = Package(
             path: "Sources/Core"
         ),
         .target(
-            name: "SparkPopoverTesting",
+            name: "SparkComponentPopoverTesting",
             dependencies: [
-                "SparkPopover",
+                "SparkComponentPopover",
                 .product(
                     name: "SparkCommon",
                     package: "spark-ios-common"
@@ -70,10 +70,10 @@ let package = Package(
             path: "Sources/Testing"
         ),
         .testTarget(
-            name: "SparkPopoverUnitTests",
+            name: "SparkComponentPopoverUnitTests",
             dependencies: [
-                "SparkPopover",
-                "SparkPopoverTesting",
+                "SparkComponentPopover",
+                "SparkComponentPopoverTesting",
                 .product(
                     name: "SparkCommonTesting",
                     package: "spark-ios-common"
@@ -86,10 +86,10 @@ let package = Package(
             path: "Tests/UnitTests"
         ),
         .testTarget(
-            name: "SparkPopoverSnapshotTests",
+            name: "SparkComponentPopoverSnapshotTests",
             dependencies: [
-                "SparkPopover",
-                "SparkPopoverTesting",
+                "SparkComponentPopover",
+                "SparkComponentPopoverTesting",
                 .product(
                     name: "SparkCommonSnapshotTesting",
                     package: "spark-ios-common"

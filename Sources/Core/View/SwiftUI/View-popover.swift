@@ -1,6 +1,6 @@
 //
 //  View-popover.swift
-//  SparkPopover
+//  SparkComponentPopover
 //
 //  Created by louis.borlee on 27/06/2024.
 //  Copyright © 2024 Leboncoin. All rights reserved.
