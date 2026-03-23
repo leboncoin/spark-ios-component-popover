@@ -52,15 +52,6 @@ final class PopoverGetColorsUseCaseTests: XCTestCase {
         XCTAssertTrue(colors.foreground.equals(self.theme.colors.accent.onAccentContainer), "Wrong foreground color for intent .accent")
     }
 
-    func test_basic() {
-        // WHEN
-        let colors = self.useCase.execute(colors: self.theme.colors, intent: .basic)
-
-        // THEN
-        XCTAssertTrue(colors.background.equals(self.theme.colors.basic.basicContainer), "Wrong background color for intent .basic")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.basic.onBasicContainer), "Wrong foreground color for intent .basic")
-    }
-
     func test_success() {
         // WHEN
         let colors = self.useCase.execute(colors: self.theme.colors, intent: .success)

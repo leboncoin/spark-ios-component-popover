@@ -15,7 +15,6 @@ public enum PopoverIntent: CaseIterable {
     case main
     case support
     case accent
-    case basic
     case success
     case alert
     case error
