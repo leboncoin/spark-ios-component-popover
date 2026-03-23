@@ -20,7 +20,7 @@ final class PopoverViewModelTests: XCTestCase {
         let getColorsUseCaseMock = PopoverGetColorsUseCasableGeneratedMock()
         getColorsUseCaseMock.executeWithColorsAndIntentReturnValue = .init(
             background: self.theme.colors.feedback.alertContainer,
-            foreground: self.theme.colors.basic.basicContainer
+            foreground: self.theme.colors.support.supportContainer
         )
 
         let getSpacesUseCaseMock = PopoverGetSpacesUseCasableGeneratedMock()
@@ -32,7 +32,7 @@ final class PopoverViewModelTests: XCTestCase {
         // WHEN
         let viewModel = PopoverViewModel(
             theme: self.theme,
-            intent: .basic,
+            intent: .support,
             showArrow: true,
             getColorsUseCase: getColorsUseCaseMock,
             getSpacesUseCase: getSpacesUseCaseMock
@@ -40,7 +40,7 @@ final class PopoverViewModelTests: XCTestCase {
 
         // THEN - Values
         XCTAssertTrue(viewModel.colors.background.equals(self.theme.colors.feedback.alertContainer), "Wrong colors.background")
-        XCTAssertTrue(viewModel.colors.foreground.equals(self.theme.colors.basic.basicContainer), "Wrong colors.foreground")
+        XCTAssertTrue(viewModel.colors.foreground.equals(self.theme.colors.support.supportContainer), "Wrong colors.foreground")
 
         XCTAssertEqual(viewModel.spaces.horizontal, 4.0, "Wrong spaces.horizontal")
         XCTAssertEqual(viewModel.spaces.vertical, 2.0, "Wrong spaces.vertical")
@@ -57,7 +57,7 @@ final class PopoverViewModelTests: XCTestCase {
             self.theme.colors as? ColorsGeneratedMock,
             "Wrong getColorsUseCaseReceivedArguments.colors"
         )
-        XCTAssertEqual(getColorsUseCaseReceivedArguments.intent, .basic, "Wrong getColorsUseCaseReceivedArguments.intent")
+        XCTAssertEqual(getColorsUseCaseReceivedArguments.intent, .support, "Wrong getColorsUseCaseReceivedArguments.intent")
 
         // THEN - GetSpacesUseCase
         XCTAssertEqual(getSpacesUseCaseMock.executeWithLayoutSpacingCallsCount, 1, "getSpacesUseCaseMock.executeWithLayoutSpacing should have been called once")

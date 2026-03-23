@@ -27,20 +27,15 @@ final class PopoverGetColorsUseCase: PopoverGetColorsUseCasable {
                 background: colors.main.mainContainer,
                 foreground: colors.main.onMainContainer
             )
-        case .support:
-            return .init(
-                background: colors.support.supportContainer,
-                foreground: colors.support.onSupportContainer
-            )
         case .accent:
             return .init(
                 background: colors.accent.accentContainer,
                 foreground: colors.accent.onAccentContainer
             )
-        case .basic:
+        case .support:
             return .init(
-                background: colors.basic.basicContainer,
-                foreground: colors.basic.onBasicContainer
+                background: colors.support.supportContainer,
+                foreground: colors.support.onSupportContainer
             )
         case .success:
             return .init(

@@ -2,3 +2,4 @@ parent_config: https://raw.githubusercontent.com/leboncoin/spark-ios-common/main
 
 excluded:
   - "**/*.generated.swift"
+  - ".build/"
