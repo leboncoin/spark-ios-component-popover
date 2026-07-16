@@ -18,13 +18,13 @@ final class PopoverViewModelTests: XCTestCase {
     func test_init() throws {
         // GIVEN
         let getColorsUseCaseMock = PopoverGetColorsUseCasableGeneratedMock()
-        getColorsUseCaseMock.executeWithColorsAndIntentReturnValue = .init(
+        getColorsUseCaseMock.executeWithColorsAndIntentAndIsLiquidGlassReturnValue = .init(
             background: self.theme.colors.feedback.alertContainer,
             foreground: self.theme.colors.support.supportContainer
         )
 
         let getSpacesUseCaseMock = PopoverGetSpacesUseCasableGeneratedMock()
-        getSpacesUseCaseMock.executeWithLayoutSpacingReturnValue = .init(
+        getSpacesUseCaseMock.executeWithLayoutSpacingAndIsLiquidGlassReturnValue = .init(
             horizontal: 4,
             vertical: 2
         )
@@ -50,22 +50,24 @@ final class PopoverViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.arrowSize, self.theme.layout.spacing.medium, "Wrong arrowSize")
 
         // THEN - GetColorsUseCase
-        XCTAssertEqual(getColorsUseCaseMock.executeWithColorsAndIntentCallsCount, 1, "getColorsUseCaseMock.executeWithColorsAndIntent should have been called once")
-        let getColorsUseCaseReceivedArguments = try XCTUnwrap(getColorsUseCaseMock.executeWithColorsAndIntentReceivedArguments, "Couldn't unwrap getColorsUseCaseMock.executeWithColorsAndIntentRe")
+        XCTAssertEqual(getColorsUseCaseMock.executeWithColorsAndIntentAndIsLiquidGlassCallsCount, 1, "getColorsUseCaseMock.executeWithColorsAndIntent should have been called once")
+        let getColorsUseCaseReceivedArguments = try XCTUnwrap(getColorsUseCaseMock.executeWithColorsAndIntentAndIsLiquidGlassReceivedArguments, "Couldn't unwrap getColorsUseCaseMock.executeWithColorsAndIntentAndIsLiquidGlassReceivedArguments")
         XCTAssertIdentical(
             getColorsUseCaseReceivedArguments.colors as? ColorsGeneratedMock,
             self.theme.colors as? ColorsGeneratedMock,
             "Wrong getColorsUseCaseReceivedArguments.colors"
         )
         XCTAssertEqual(getColorsUseCaseReceivedArguments.intent, .support, "Wrong getColorsUseCaseReceivedArguments.intent")
+        XCTAssertEqual(getColorsUseCaseReceivedArguments.isLiquidGlass, PopoverConstants.isLiquidGlass, "Wrong getColorsUseCaseReceivedArguments.isLiquidGlass")
 
         // THEN - GetSpacesUseCase
-        XCTAssertEqual(getSpacesUseCaseMock.executeWithLayoutSpacingCallsCount, 1, "getSpacesUseCaseMock.executeWithLayoutSpacing should have been called once")
-        let getSpacesUseCaseReceivedLayoutSpacing = try XCTUnwrap(getSpacesUseCaseMock.executeWithLayoutSpacingReceivedLayoutSpacing, "Couldn't unwrap getSpacesUseCaseMock.executeWithLayoutSpacingReceivedLayoutSpacing")
+        XCTAssertEqual(getSpacesUseCaseMock.executeWithLayoutSpacingAndIsLiquidGlassCallsCount, 1, "getSpacesUseCaseMock.executeWithLayoutSpacing should have been called once")
+        let getSpacesUseCaseReceivedArguments = try XCTUnwrap(getSpacesUseCaseMock.executeWithLayoutSpacingAndIsLiquidGlassReceivedArguments, "Couldn't unwrap getSpacesUseCaseMock.executeWithLayoutSpacingAndIsLiquidGlassReceivedArguments")
         XCTAssertIdentical(
-            getSpacesUseCaseReceivedLayoutSpacing as? LayoutSpacingGeneratedMock,
+            getSpacesUseCaseReceivedArguments.layoutSpacing as? LayoutSpacingGeneratedMock,
             self.theme.layout.spacing as? LayoutSpacingGeneratedMock,
             "Wrong getSpacesUseCaseReceivedLayoutSpacing"
         )
+        XCTAssertEqual(getSpacesUseCaseReceivedArguments.isLiquidGlass, PopoverConstants.isLiquidGlass, "Wrong getSpacesUseCaseMock.isLiquidGlass")
     }
 }

@@ -9,88 +9,242 @@
 import XCTest
 @testable import SparkComponentPopover
 @_spi(SI_SPI) @testable import SparkComponentPopoverTesting
+@_spi(SI_SPI) import SparkTheming
 @_spi(SI_SPI) import SparkThemingTesting
 
 final class PopoverGetColorsUseCaseTests: XCTestCase {
 
+    // MARK: - Properties
+
     private let theme = ThemeGeneratedMock.mocked()
     private let useCase = PopoverGetColorsUseCase()
 
-    func test_surface() {
+    // MARK: - Tests
+
+    func test_execute_withIsLiquidGlassTrue_surface() {
         // WHEN
-        let colors = self.useCase.execute(colors: self.theme.colors, intent: .surface)
+        let colors = self.useCase.execute(colors: self.theme.colors, intent: .surface, isLiquidGlass: true)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .surface")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .surface")
+    }
+
+    func test_execute_withIsLiquidGlassFalse_surface() {
+        // WHEN
+        let colors = self.useCase.execute(colors: self.theme.colors, intent: .surface, isLiquidGlass: false)
 
         // THEN
         XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .surface")
         XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .surface")
     }
 
-    func test_main() {
+    func test_execute_withIsLiquidGlassTrue_main() {
         // WHEN
-        let colors = self.useCase.execute(colors: self.theme.colors, intent: .main)
+        let colors = self.useCase.execute(colors: self.theme.colors, intent: .main, isLiquidGlass: true)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .main")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.main.mainVariant), "Wrong foreground color for intent .main")
+    }
+
+    func test_execute_withIsLiquidGlassFalse_main() {
+        // WHEN
+        let colors = self.useCase.execute(colors: self.theme.colors, intent: .main, isLiquidGlass: false)
 
         // THEN
         XCTAssertTrue(colors.background.equals(self.theme.colors.main.mainContainer), "Wrong background color for intent .main")
         XCTAssertTrue(colors.foreground.equals(self.theme.colors.main.onMainContainer), "Wrong foreground color for intent .main")
     }
 
-    func test_support() {
+    @available(*, deprecated, message: "Testing deprecated intent .support")
+    func test_execute_withIsLiquidGlassTrue_support() {
         // WHEN
-        let colors = self.useCase.execute(colors: self.theme.colors, intent: .support)
+        let colors = self.useCase.execute(colors: self.theme.colors, intent: .support, isLiquidGlass: true)
 
         // THEN
-        XCTAssertTrue(colors.background.equals(self.theme.colors.support.supportContainer), "Wrong background color for intent .support")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.support.onSupportContainer), "Wrong foreground color for intent .support")
+        XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .support")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .support")
     }
 
-    func test_accent() {
+    @available(*, deprecated, message: "Testing deprecated intent .support")
+    func test_execute_withIsLiquidGlassFalse_support() {
         // WHEN
-        let colors = self.useCase.execute(colors: self.theme.colors, intent: .accent)
+        let colors = self.useCase.execute(colors: self.theme.colors, intent: .support, isLiquidGlass: false)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .support")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .support")
+    }
+
+    // MARK: - Execute New Tests
+
+    func test_executeNew_surface() {
+        // WHEN
+        let colors = self.useCase.executeNew(colors: self.theme.colors, intent: .surface)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .surface")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .surface")
+    }
+
+    func test_executeNew_main() {
+        // WHEN
+        let colors = self.useCase.executeNew(colors: self.theme.colors, intent: .main)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .main")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.main.mainVariant), "Wrong foreground color for intent .main")
+    }
+
+    func test_executeNew_accent() {
+        // WHEN
+        let colors = self.useCase.executeNew(colors: self.theme.colors, intent: .accent)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .accent")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.accent.accent), "Wrong foreground color for intent .accent")
+    }
+
+    @available(*, deprecated, message: "Testing deprecated intent .support")
+    func test_executeNew_support() {
+        // WHEN
+        let colors = self.useCase.executeNew(colors: self.theme.colors, intent: .support)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .support")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .support")
+    }
+
+    @available(*, deprecated, message: "Testing deprecated intent .success")
+    func test_executeNew_success() {
+        // WHEN
+        let colors = self.useCase.executeNew(colors: self.theme.colors, intent: .success)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .success")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .success")
+    }
+
+    @available(*, deprecated, message: "Testing deprecated intent .alert")
+    func test_executeNew_alert() {
+        // WHEN
+        let colors = self.useCase.executeNew(colors: self.theme.colors, intent: .alert)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .alert")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .alert")
+    }
+
+    @available(*, deprecated, message: "Testing deprecated intent .error")
+    func test_executeNew_error() {
+        // WHEN
+        let colors = self.useCase.executeNew(colors: self.theme.colors, intent: .error)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .error")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .error")
+    }
+
+    func test_executeNew_info() {
+        // WHEN
+        let colors = self.useCase.executeNew(colors: self.theme.colors, intent: .info)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .info")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.feedback.info), "Wrong foreground color for intent .info")
+    }
+
+    func test_executeNew_neutral() {
+        // WHEN
+        let colors = self.useCase.executeNew(colors: self.theme.colors, intent: .neutral)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .neutral")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.feedback.neutral), "Wrong foreground color for intent .neutral")
+    }
+
+    // MARK: - Old iOS version Tests
+
+    func test_executeOldIosVersion_surface() {
+        // WHEN
+        let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .surface)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .surface")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .surface")
+    }
+
+    func test_executeOldIosVersion_main() {
+        // WHEN
+        let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .main)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(self.theme.colors.main.mainContainer), "Wrong background color for intent .main")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.main.onMainContainer), "Wrong foreground color for intent .main")
+    }
+
+    func test_executeOldIosVersion_accent() {
+        // WHEN
+        let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .accent)
 
         // THEN
         XCTAssertTrue(colors.background.equals(self.theme.colors.accent.accentContainer), "Wrong background color for intent .accent")
         XCTAssertTrue(colors.foreground.equals(self.theme.colors.accent.onAccentContainer), "Wrong foreground color for intent .accent")
     }
 
-    func test_success() {
+    @available(*, deprecated, message: "Testing deprecated intent .support")
+    func test_executeOldIosVersion_support() {
         // WHEN
-        let colors = self.useCase.execute(colors: self.theme.colors, intent: .success)
+        let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .support)
 
         // THEN
-        XCTAssertTrue(colors.background.equals(self.theme.colors.feedback.successContainer), "Wrong background color for intent .success")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.feedback.onSuccessContainer), "Wrong foreground color for intent .success")
+        XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .support")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .support")
     }
 
-    func test_alert() {
+    @available(*, deprecated, message: "Testing deprecated intent .success")
+    func test_executeOldIosVersion_success() {
         // WHEN
-        let colors = self.useCase.execute(colors: self.theme.colors, intent: .alert)
+        let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .success)
 
         // THEN
-        XCTAssertTrue(colors.background.equals(self.theme.colors.feedback.alertContainer), "Wrong background color for intent .alert")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.feedback.onAlertContainer), "Wrong foreground color for intent .alert")
+        XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .success")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .success")
     }
 
-    func test_error() {
+    @available(*, deprecated, message: "Testing deprecated intent .alert")
+    func test_executeOldIosVersion_alert() {
         // WHEN
-        let colors = self.useCase.execute(colors: self.theme.colors, intent: .error)
+        let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .alert)
 
         // THEN
-        XCTAssertTrue(colors.background.equals(self.theme.colors.feedback.errorContainer), "Wrong background color for intent .error")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.feedback.onErrorContainer), "Wrong foreground color for intent .error")
+        XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .alert")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .alert")
     }
 
-    func test_info() {
+    @available(*, deprecated, message: "Testing deprecated intent .error")
+    func test_executeOldIosVersion_error() {
         // WHEN
-        let colors = self.useCase.execute(colors: self.theme.colors, intent: .info)
+        let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .error)
+
+        // THEN
+        XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .error")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .error")
+    }
+
+    func test_executeOldIosVersion_info() {
+        // WHEN
+        let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .info)
 
         // THEN
         XCTAssertTrue(colors.background.equals(self.theme.colors.feedback.infoContainer), "Wrong background color for intent .info")
         XCTAssertTrue(colors.foreground.equals(self.theme.colors.feedback.onInfoContainer), "Wrong foreground color for intent .info")
     }
 
-    func test_neutral() {
+    func test_executeOldIosVersion_neutral() {
         // WHEN
-        let colors = self.useCase.execute(colors: self.theme.colors, intent: .neutral)
+        let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .neutral)
 
         // THEN
         XCTAssertTrue(colors.background.equals(self.theme.colors.feedback.neutralContainer), "Wrong background color for intent .neutral")

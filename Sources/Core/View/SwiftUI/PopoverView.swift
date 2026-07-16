@@ -28,8 +28,11 @@ struct PopoverView<Content>: View where Content: View {
 
     var body: some View {
         ZStack {
-            self.viewModel.colors.background.color
-                .scaleEffect(2)  // Needed to fill the arrow
+            if !PopoverConstants.isLiquidGlass {
+                self.viewModel.colors.background.color
+                    .scaleEffect(2)  // Needed to fill the arrow
+            }
+
             self.content(self.viewModel.colors)
                 .padding(
                     EdgeInsets(

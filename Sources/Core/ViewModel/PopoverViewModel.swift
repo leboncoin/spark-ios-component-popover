@@ -22,8 +22,9 @@ struct PopoverViewModel {
         getColorsUseCase: any PopoverGetColorsUseCasable = PopoverGetColorsUseCase(),
         getSpacesUseCase: any PopoverGetSpacesUseCasable = PopoverGetSpacesUseCase()
     ) {
-        self.colors = getColorsUseCase.execute(colors: theme.colors, intent: intent)
-        self.spaces = getSpacesUseCase.execute(layoutSpacing: theme.layout.spacing)
+        let isLiquidGlass = PopoverConstants.isLiquidGlass
+        self.colors = getColorsUseCase.execute(colors: theme.colors, intent: intent, isLiquidGlass: isLiquidGlass)
+        self.spaces = getSpacesUseCase.execute(layoutSpacing: theme.layout.spacing, isLiquidGlass: isLiquidGlass)
         self.showArrow = showArrow
         self.arrowSize = theme.layout.spacing.medium
     }

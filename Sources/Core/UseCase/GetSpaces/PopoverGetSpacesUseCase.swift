@@ -11,11 +11,14 @@ import SparkTheming
 
 // sourcery: AutoMockable
 protocol PopoverGetSpacesUseCasable {
-    func execute(layoutSpacing: any LayoutSpacing) -> PopoverSpaces
+    func execute(layoutSpacing: any LayoutSpacing, isLiquidGlass: Bool) -> PopoverSpaces
 }
 
 final class PopoverGetSpacesUseCase: PopoverGetSpacesUseCasable {
-    func execute(layoutSpacing: any LayoutSpacing) -> PopoverSpaces {
-        return .init(horizontal: layoutSpacing.large, vertical: layoutSpacing.large)
+    func execute(layoutSpacing: any LayoutSpacing, isLiquidGlass: Bool) -> PopoverSpaces {
+        return .init(
+            horizontal: isLiquidGlass ? layoutSpacing.xLarge : layoutSpacing.large,
+            vertical: layoutSpacing.large
+        )
     }
 }
