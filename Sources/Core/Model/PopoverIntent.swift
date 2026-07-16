@@ -11,23 +11,48 @@ import SparkTheming
 
 /// Intent used to { get set } background & foreground colors on the popover
 public enum PopoverIntent: CaseIterable {
-    case surface
-    case main
-    case support
     case accent
-    case success
-    case alert
-    case error
     case info
+    case main
     case neutral
+    case surface
+
+    @available(*, deprecated, message: "Not used anymore by the Spark popover")
+    case support
+    @available(*, deprecated, message: "Not used anymore by the Spark popover")
+    case success
+    @available(*, deprecated, message: "Not used anymore by the Spark popover")
+    case alert
+    @available(*, deprecated, message: "Not used anymore by the Spark popover")
+    case error
+
+    // MARK: - Properties
+
+    public static var allCases: [PopoverIntent] = [
+        .accent,
+        .info,
+        .main,
+        .neutral,
+        .surface
+    ]
 
     internal var getColorsUseCase: PopoverGetColorsUseCasable {
         return PopoverGetColorsUseCase()
     }
 
-    internal func getColors(theme: any Theme, getColorsUseCase: PopoverGetColorsUseCasable) -> PopoverColors {
-        return getColorsUseCase.execute(colors: theme.colors, intent: self)
+    internal func getColors(
+        theme: any Theme,
+        getColorsUseCase: PopoverGetColorsUseCasable,
+        isLiquidGlass: Bool = PopoverConstants.isLiquidGlass
+    ) -> PopoverColors {
+        return getColorsUseCase.execute(
+            colors: theme.colors,
+            intent: self,
+            isLiquidGlass: isLiquidGlass
+        )
     }
+
+    // MARK: - Methods
 
     /// Get the colors to apply on popovers from an intent
     /// - Parameters:

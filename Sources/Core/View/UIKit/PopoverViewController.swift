@@ -27,10 +27,12 @@ public final class PopoverViewController: UIViewController, UIPopoverPresentatio
         self.modalPresentationStyle = .popover
         self.popoverPresentationController?.delegate = self
 
-        PopoverBackgroundConfiguration.showArrow = self.viewModel.showArrow
-        PopoverBackgroundConfiguration.backgroundColor = self.viewModel.colors.background.uiColor
-        PopoverBackgroundConfiguration.arrowSize = self.viewModel.arrowSize
-        self.popoverPresentationController?.popoverBackgroundViewClass = PopoverBackgroundView.self
+        if !PopoverConstants.isLiquidGlass {
+            PopoverBackgroundConfiguration.showArrow = self.viewModel.showArrow
+            PopoverBackgroundConfiguration.backgroundColor = self.viewModel.colors.background.uiColor
+            PopoverBackgroundConfiguration.arrowSize = self.viewModel.arrowSize
+            self.popoverPresentationController?.popoverBackgroundViewClass = PopoverBackgroundView.self
+        }
     }
 
     /// PopoverViewController initializer
@@ -62,19 +64,27 @@ public final class PopoverViewController: UIViewController, UIPopoverPresentatio
         self.view.addSubview(view)
 
         let leadingConstraint = view.leadingAnchor.constraint(
-            greaterThanOrEqualTo: self.view.leadingAnchor,
+            equalTo: self.view.leadingAnchor,
             constant: self.viewModel.spaces.horizontal
         )
         leadingConstraint.priority = .required - 1
+
         let topConstraint = view.topAnchor.constraint(
-            greaterThanOrEqualTo: self.view.topAnchor,
-            constant: self.viewModel.spaces.vertical
+            equalTo: self.view.topAnchor,
+            constant: self.viewModel.spaces.vertical + (PopoverConstants.isLiquidGlass ? 10 : 0)
         )
         topConstraint.priority = .required - 1
+
+        let bottomConstraint = view.bottomAnchor.constraint(
+            equalTo: self.view.bottomAnchor,
+            constant: -self.viewModel.spaces.vertical
+        )
+        bottomConstraint.priority = .required - 1
+
         NSLayoutConstraint.activate([
             leadingConstraint,
             topConstraint,
-            view.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            bottomConstraint,
             view.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
 
