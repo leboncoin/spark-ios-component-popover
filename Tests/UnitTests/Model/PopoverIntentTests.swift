@@ -21,20 +21,20 @@ final class PopoverIntentTests: XCTestCase {
 
     func test_allCases_count() {
         // THEN
-        XCTAssertEqual(PopoverIntent.allCases.count, 5, "Wrong allCases count")
+        XCTAssertEqual(PopoverIntent.allCases.count, 2, "Wrong allCases count")
     }
 
     func test_allCases_contains_all_non_deprecated_cases() {
         // THEN
-        XCTAssertTrue(PopoverIntent.allCases.contains(.accent), "allCases should contain .accent")
-        XCTAssertTrue(PopoverIntent.allCases.contains(.info), "allCases should contain .info")
-        XCTAssertTrue(PopoverIntent.allCases.contains(.main), "allCases should contain .main")
         XCTAssertTrue(PopoverIntent.allCases.contains(.neutral), "allCases should contain .neutral")
         XCTAssertTrue(PopoverIntent.allCases.contains(.surface), "allCases should contain .surface")
     }
 
     func test_allCases_does_not_contain_deprecated_cases() {
         // THEN
+        XCTAssertFalse(PopoverIntent.allCases.contains(.accent), "allCases should not contain .accent (deprecated)")
+        XCTAssertFalse(PopoverIntent.allCases.contains(.info), "allCases should not contain .info (deprecated)")
+        XCTAssertFalse(PopoverIntent.allCases.contains(.main), "allCases should not contain .main (deprecated)")
         XCTAssertFalse(PopoverIntent.allCases.contains(.support), "allCases should not contain .support (deprecated)")
         XCTAssertFalse(PopoverIntent.allCases.contains(.success), "allCases should not contain .success (deprecated)")
         XCTAssertFalse(PopoverIntent.allCases.contains(.alert), "allCases should not contain .alert (deprecated)")
