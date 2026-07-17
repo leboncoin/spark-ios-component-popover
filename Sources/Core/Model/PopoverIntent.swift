@@ -11,12 +11,15 @@ import SparkTheming
 
 /// Intent used to { get set } background & foreground colors on the popover
 public enum PopoverIntent: CaseIterable {
-    case accent
-    case info
-    case main
     case neutral
     case surface
 
+    @available(*, deprecated, message: "Not used anymore by the Spark popover")
+    case accent
+    @available(*, deprecated, message: "Not used anymore by the Spark popover")
+    case info
+    @available(*, deprecated, message: "Not used anymore by the Spark popover")
+    case main
     @available(*, deprecated, message: "Not used anymore by the Spark popover")
     case support
     @available(*, deprecated, message: "Not used anymore by the Spark popover")
@@ -29,9 +32,6 @@ public enum PopoverIntent: CaseIterable {
     // MARK: - Properties
 
     public static var allCases: [PopoverIntent] = [
-        .accent,
-        .info,
-        .main,
         .neutral,
         .surface
     ]

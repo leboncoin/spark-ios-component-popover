@@ -32,29 +32,14 @@ final class PopoverGetColorsUseCase: PopoverGetColorsUseCasable {
     }
 
     func executeNew(colors: any Colors, intent: PopoverIntent) -> PopoverColors {
-        switch intent {
-        case .accent:
-            return .init(
-                background: ColorTokenClear(),
-                foreground: colors.accent.accent
-            )
-        case .info:
-            return .init(
-                background: ColorTokenClear(),
-                foreground: colors.feedback.info
-            )
-        case .main:
-            return .init(
-                background: ColorTokenClear(),
-                foreground: colors.main.mainVariant
-            )
+        return switch intent {
         case .neutral:
-            return .init(
+            .init(
                 background: ColorTokenClear(),
                 foreground: colors.feedback.neutral
             )
         default:
-            return .init(
+            .init(
                 background: ColorTokenClear(),
                 foreground: colors.base.onSurface
             )
@@ -62,29 +47,14 @@ final class PopoverGetColorsUseCase: PopoverGetColorsUseCasable {
     }
 
     func executeOldIosVersion(colors: any Colors, intent: PopoverIntent) -> PopoverColors {
-        switch intent {
-        case .accent:
-            return .init(
-                background: colors.accent.accentContainer,
-                foreground: colors.accent.onAccentContainer
-            )
-        case .info:
-            return .init(
-                background: colors.feedback.infoContainer,
-                foreground: colors.feedback.onInfoContainer
-            )
-        case .main:
-            return .init(
-                background: colors.main.mainContainer,
-                foreground: colors.main.onMainContainer
-            )
+        return switch intent {
         case .neutral:
-            return .init(
+            .init(
                 background: colors.feedback.neutralContainer,
                 foreground: colors.feedback.onNeutralContainer
             )
         default:
-            return .init(
+            .init(
                 background: colors.base.surface,
                 foreground: colors.base.onSurface
             )

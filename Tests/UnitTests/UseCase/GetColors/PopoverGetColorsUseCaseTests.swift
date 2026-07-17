@@ -45,7 +45,7 @@ final class PopoverGetColorsUseCaseTests: XCTestCase {
 
         // THEN
         XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .main")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.main.mainVariant), "Wrong foreground color for intent .main")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .main")
     }
 
     func test_execute_withIsLiquidGlassFalse_main() {
@@ -53,8 +53,8 @@ final class PopoverGetColorsUseCaseTests: XCTestCase {
         let colors = self.useCase.execute(colors: self.theme.colors, intent: .main, isLiquidGlass: false)
 
         // THEN
-        XCTAssertTrue(colors.background.equals(self.theme.colors.main.mainContainer), "Wrong background color for intent .main")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.main.onMainContainer), "Wrong foreground color for intent .main")
+        XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .main")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .main")
     }
 
     @available(*, deprecated, message: "Testing deprecated intent .support")
@@ -94,7 +94,7 @@ final class PopoverGetColorsUseCaseTests: XCTestCase {
 
         // THEN
         XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .main")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.main.mainVariant), "Wrong foreground color for intent .main")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .main")
     }
 
     func test_executeNew_accent() {
@@ -103,7 +103,7 @@ final class PopoverGetColorsUseCaseTests: XCTestCase {
 
         // THEN
         XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .accent")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.accent.accent), "Wrong foreground color for intent .accent")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .accent")
     }
 
     @available(*, deprecated, message: "Testing deprecated intent .support")
@@ -152,7 +152,7 @@ final class PopoverGetColorsUseCaseTests: XCTestCase {
 
         // THEN
         XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .info")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.feedback.info), "Wrong foreground color for intent .info")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .info")
     }
 
     func test_executeNew_neutral() {
@@ -180,8 +180,8 @@ final class PopoverGetColorsUseCaseTests: XCTestCase {
         let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .main)
 
         // THEN
-        XCTAssertTrue(colors.background.equals(self.theme.colors.main.mainContainer), "Wrong background color for intent .main")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.main.onMainContainer), "Wrong foreground color for intent .main")
+        XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .main")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .main")
     }
 
     func test_executeOldIosVersion_accent() {
@@ -189,8 +189,8 @@ final class PopoverGetColorsUseCaseTests: XCTestCase {
         let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .accent)
 
         // THEN
-        XCTAssertTrue(colors.background.equals(self.theme.colors.accent.accentContainer), "Wrong background color for intent .accent")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.accent.onAccentContainer), "Wrong foreground color for intent .accent")
+        XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .accent")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .accent")
     }
 
     @available(*, deprecated, message: "Testing deprecated intent .support")
@@ -238,8 +238,8 @@ final class PopoverGetColorsUseCaseTests: XCTestCase {
         let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .info)
 
         // THEN
-        XCTAssertTrue(colors.background.equals(self.theme.colors.feedback.infoContainer), "Wrong background color for intent .info")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.feedback.onInfoContainer), "Wrong foreground color for intent .info")
+        XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .info")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .info")
     }
 
     func test_executeOldIosVersion_neutral() {
