@@ -152,16 +152,17 @@ final class PopoverGetColorsUseCaseTests: XCTestCase {
 
         // THEN
         XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .info")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .info")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.feedback.info), "Wrong foreground color for intent .info")
     }
 
+    @available(*, deprecated, message: "Testing deprecated intent .neutral")
     func test_executeNew_neutral() {
         // WHEN
         let colors = self.useCase.executeNew(colors: self.theme.colors, intent: .neutral)
 
         // THEN
         XCTAssertTrue(colors.background.equals(ColorTokenClear()), "Wrong background color for intent .neutral")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.feedback.neutral), "Wrong foreground color for intent .neutral")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .neutral")
     }
 
     // MARK: - Old iOS version Tests
@@ -238,16 +239,17 @@ final class PopoverGetColorsUseCaseTests: XCTestCase {
         let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .info)
 
         // THEN
-        XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .info")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .info")
+        XCTAssertTrue(colors.background.equals(self.theme.colors.feedback.infoContainer), "Wrong background color for intent .info")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.feedback.onInfoContainer), "Wrong foreground color for intent .info")
     }
 
+    @available(*, deprecated, message: "Testing deprecated intent .neutral")
     func test_executeOldIosVersion_neutral() {
         // WHEN
         let colors = self.useCase.executeOldIosVersion(colors: self.theme.colors, intent: .neutral)
 
         // THEN
-        XCTAssertTrue(colors.background.equals(self.theme.colors.feedback.neutralContainer), "Wrong background color for intent .neutral")
-        XCTAssertTrue(colors.foreground.equals(self.theme.colors.feedback.onNeutralContainer), "Wrong foreground color for intent .neutral")
+        XCTAssertTrue(colors.background.equals(self.theme.colors.base.surface), "Wrong background color for intent .neutral")
+        XCTAssertTrue(colors.foreground.equals(self.theme.colors.base.onSurface), "Wrong foreground color for intent .neutral")
     }
 }
