@@ -33,30 +33,30 @@ final class PopoverGetColorsUseCase: PopoverGetColorsUseCasable {
 
     func executeNew(colors: any Colors, intent: PopoverIntent) -> PopoverColors {
         return switch intent {
-        case .info:
+        case .surface:
             .init(
                 background: ColorTokenClear(),
-                foreground: colors.feedback.info
+                foreground: colors.base.onSurface
             )
         default:
             .init(
                 background: ColorTokenClear(),
-                foreground: colors.base.onSurface
+                foreground: colors.feedback.info
             )
         }
     }
 
     func executeOldIosVersion(colors: any Colors, intent: PopoverIntent) -> PopoverColors {
         return switch intent {
-        case .info:
-            .init(
-                background: colors.feedback.infoContainer,
-                foreground: colors.feedback.onInfoContainer
-            )
-        default:
+        case .surface:
             .init(
                 background: colors.base.surface,
                 foreground: colors.base.onSurface
+            )
+        default:
+            .init(
+                background: colors.feedback.infoContainer,
+                foreground: colors.feedback.onInfoContainer
             )
         }
     }
